@@ -1,0 +1,80 @@
+<!Doctype html>
+<html>
+<meta charset="UTF8"/>
+<title>Hashtagagram Demo</title>
+<head>
+<link rel="stylesheet" href="reset.css"/>
+<style type="text/css">
+#Photos ul li{
+	width:auto;
+	height:auto;
+	float:left;
+}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="jquery.hashtagagram.js"></script>
+<script type="text/javascript">
+$(function(){
+	$('#Photos').hashtagagram({
+		client_id:'6a44b79a6f754686b780ab9e23873fcd',
+		tag_name:'',
+		enable_cache:false,
+		count:20,
+		filters:{users:[], like:false},
+		client_mode:true,
+		client_name:'concretejungle',
+		client_liked_media:false,
+		client_tags:[],
+		wrapper_elements:['a']
+	});
+	
+
+	//users in the format below
+	//users:['belindapolson','natalienolie','lafotonline']
+	
+	//like : true or false , [true will return images which have likes where false will return images having or not having likes
+	
+	//Comments
+	//You can filter by users or by like or both
+	//I have also introduced a propery max_next_urls. This will load the pagination NextUrl, data. So if we have less photos than we need we will load the pagination next url if available. I have set it to 5 to limit requests to the server.
+	// you can rename the max_next_urls to any other word you like in the plugin.
+	
+	//New wrapper_elements variable has been added, if you want to have unordered list(ul), add 'ul' in the array,
+	//If you want to have link, add 'a' in the array
+	//If you want only the images, then leave it empty like this []
+});
+</script>
+</head>
+<body>
+<div id="Photos"></div>
+<div id="UserPhotos"></div>
+<br/>
+</body>
+</html>
+<!-- 
+Hashtagram Client mode DOC
+
+To get the token, Below are the steps :
+
+1. First you need to add another node with client name, client id, secret and redirect url in the clients.xml file that is on the server.
+
+2. Then, you go to the link below
+http://shopigram.tricky3.co.uk/generate-token.php?client=rickydazla, add the appropriate client name.
+
+If client is found, you will be redirected to the Instagram login form, after successfully login, you will be redirected to the redirection url that has been stated in instagram. 
+The authorization token will be found in the url.
+
+3. You copy the authorization token and go to this page http://shopigram.tricky3.co.uk/savetoken.php , enter the client name and token and hit the Submit button. Token saved.
+
+Now you can show the client liked media. I will recommend to set enable_cache:true.(cache_duration:1 -> is for 1 day)
+
+
+Other things : 
+
+1. client_mode:true, -> if set to false( plugin will behave like previously, get photos based on tag_name(then filter by likes and users)
+
+2. client_name:'rickydazla',-> If client_mode is true, this one is needed to get the token from your server.
+
+3. client_tags:['tattoo'] -> put tags here, this can be left empty[]. If you are filtering by tags, I will recommend you to set the enable_cache variable to true, because this filtering takes up some time.
+
+-->
